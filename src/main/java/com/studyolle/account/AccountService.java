@@ -6,7 +6,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,11 +30,16 @@ public class AccountService {
         return newAccount;
     }
 
+
+    public void resendEmail(Account account) {
+        sendSignUpConfirmEmail(account);
+    }
+
     private Account saveNewAccount(SignUpForm signUpForm) {
         Account account = Account.builder()
                 .email(signUpForm.getEmail())
                 .nickname(signUpForm.getNickname())
-                .password(passwordEncoder.encode(signUpForm.getPassword()))  // TODO Password Encoding 필요함
+                .password(passwordEncoder.encode(signUpForm.getPassword()))
                 .studyEnrollmentResultWeb(true)
                 .studyUpdatedByWeb(true)
                 .build()
@@ -63,4 +67,5 @@ public class AccountService {
 
         SecurityContextHolder.getContext().setAuthentication(token);
     }
+
 }
