@@ -45,6 +45,7 @@ public class AccountService implements UserDetailsService {
                 .email(signUpForm.getEmail())
                 .nickname(signUpForm.getNickname())
                 .password(passwordEncoder.encode(signUpForm.getPassword()))
+                .studyCreatedByWeb(true)
                 .studyEnrollmentResultWeb(true)
                 .studyUpdatedByWeb(true)
                 .build()
