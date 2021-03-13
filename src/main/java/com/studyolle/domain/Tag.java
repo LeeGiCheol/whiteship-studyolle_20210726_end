@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
@@ -11,8 +12,7 @@ import javax.persistence.Id;
 @Builder @AllArgsConstructor @NoArgsConstructor
 public class Tag {
 
-    @Id
-    @Generated
+    @Id @GeneratedValue
     private Long id;
 
     @Column(unique = true, nullable = false)
